@@ -54,6 +54,25 @@ Audio and Image CAPTCHAs are in seprated modules:
 This is the APIs for your daily works. We do have built-in voice data and font
 data. But it is suggested that you use your own voice and font data.
 
+Usage example
+-------------
+
+If you want to display the captcha images without saving them to disk, blob storage or cdn, you can use *base64* encoding like the following example:
+
+.. code:: python
+
+    from captcha.image import ImageCaptcha
+
+    image = ImageCaptcha(fonts=['/path/A.ttf', '/path/B.ttf'])
+
+    data = image.generate('1234')
+    b64string = b64encode(image.read()).decode('utf-8')
+
+Then you can display the image on HTML using the *img* tag:
+
+.. code:: jinja
+
+    <img src="data:image/jpeg;charset=utf-8;base64,{{ b64string }}" />
 
 Contribution
 ------------
